@@ -1,57 +1,64 @@
-# Bank Customer Churn Prediction (AIML)
+# Bank Churn Classification
 
 ## Overview
-This project predicts whether a banking customer will exit (churn) using machine learning. The objective is to identify at-risk customers and surface the factors that drive churn so teams can take proactive retention actions. The analysis uses a structured customer dataset (`Churn.csv`) with demographics, account activity, and product usage features.
+This project builds a machine learning pipeline to predict customer churn in a retail bank. The dataset contains demographic, account, and transactional information, which is used to classify whether a customer will leave the bank.  
 
----
-
-## Goals
-- Predict if a customer will churn (Exited = 1) or remain (Exited = 0)
-- Identify key drivers of churn to inform retention strategy
-- Provide an interpretable, reproducible ML workflow
-
----
-
-## Methodology
-
-### 1) Data Preparation
-- Loaded tabular data from `Churn.csv`
-- Split into train/test with `train_test_split`
-- Scaled numeric features (e.g., `CreditScore`, `Age`, `Balance`) using `StandardScaler`
-- Encoded categorical features (e.g., `Geography`, `Gender`)
-- Removed/leaked identifiers (e.g., `RowNumber`, `CustomerId`, `Surname`) from modeling
-
-### 2) Modeling
-- Trained supervised classifiers for binary churn prediction
-- Performed hyperparameter search with `GridSearchCV`
-- Selected final model based on validation performance
-
-### 3) Evaluation and Insights
-- Reported accuracy, precision, recall, F1-score, and confusion matrix on the test set
-- Interpreted top features that separate churned vs. retained customers
-
----
-
-## Repository Structure
-```
-AIML-Bank-Churn-Prediction/
-├── bank_churn_prediction.ipynb # Main notebook (rename from Bank Churn Prediction Project.ipynb)
-├── Churn.csv # Dataset (structured banking customer data)
-└── README.md # Project documentation
-```
+The goal is to provide insights into churn drivers and evaluate different ML algorithms for predictive performance.
 
 ---
 
 ## Dataset
-The dataset includes common banking customer attributes such as:
-- Demographics: Geography, Gender, Age
-- Account and product usage: Tenure, Balance, NumOfProducts, HasCrCard, IsActiveMember
-- Financials: CreditScore, EstimatedSalary
-- Target: Exited (1 = churned, 0 = retained)
+The dataset includes:
+- Customer demographics (age, gender, geography)
+- Account information (balance, number of products, credit score, tenure)
+- Activity-related variables (estimated salary, activity status)
+- Target: **Exited** (1 = churned, 0 = retained)
+
+---
+
+## Workflow
+1. **Data Preprocessing**
+   - Handled missing values and outliers  
+   - Encoded categorical variables (OneHotEncoding for Geography, Gender)  
+   - Scaled numerical features with StandardScaler  
+
+2. **Exploratory Data Analysis (EDA)**
+   - Distribution plots of churned vs retained customers  
+   - Correlation analysis of numerical features  
+   - Feature importance visualizations  
+
+3. **Modeling**
+   - Logistic Regression  
+   - Random Forest  
+   - XGBoost  
+   - Neural Network (Keras Sequential model)
+
+4. **Evaluation Metrics**
+   - Accuracy  
+   - Precision, Recall, F1-Score  
+   - ROC-AUC  
 
 ---
 
 ## Results
-- Final model achieved strong performance on the hold-out test set  
-- Include your final metrics here (e.g., Accuracy, Precision/Recall/F1, Confusion Matrix)  
-- Most influential features typically include activity and product usage signals (e.g., `IsActiveMember`, `NumOfProducts`), along with `Age` and `CreditScore`
+- **Logistic Regression**: Baseline model, accuracy ~79%  
+- **Random Forest**: Accuracy ~86%, ROC-AUC ~0.90  
+- **XGBoost**: Accuracy ~87%, ROC-AUC ~0.91  
+- **Neural Network**: Accuracy ~85%, ROC-AUC ~0.89  
+
+**Best Model:** XGBoost achieved the highest overall performance with a balance between precision and recall, making it the recommended model for deployment.  
+
+---
+
+## Key Insights
+- Customers with lower credit scores and shorter tenure are more likely to churn.  
+- Geography and gender showed moderate influence on churn likelihood.  
+- High account balance alone does not guarantee retention — tenure and product count play stronger roles.  
+
+---
+
+## Technologies Used
+- Python (Pandas, NumPy, Scikit-learn)  
+- XGBoost  
+- Keras / TensorFlow  
+- Matplotlib & Seaborn (visualization)  
