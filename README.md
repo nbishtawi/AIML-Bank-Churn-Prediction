@@ -58,11 +58,12 @@ The dataset includes:
 ---
 
 ## Repository Structure
-
+```
 Bank-Churn-Prediction/
 ├── Bank Churn Prediction Project.ipynb # Main notebook
 ├── Churn.csv # Dataset (Twitter US Airline Sentiment)
 └── README.md # Project documentation
+```
 
 ---
 
